@@ -1,0 +1,179 @@
+.write {
+  padding-top: 50px;
+}
+
+.writeImg {
+  margin-left: 150px;
+  width: 70vw;
+  /* height: 250px; */
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.blogImageContainer {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.deleteBlogImg {
+  font-size: 44px;
+}
+
+.deleteBlogImg svg {
+  fill: red;
+}
+
+.blogImage {
+  width: 60%;
+}
+
+.blogImage img {
+  width: 100%;
+}
+
+.writeForm {
+  position: relative;
+}
+
+.writeFormGroup {
+  margin-left: 150px;
+  display: flex;
+  align-items: center;
+}
+
+.writeIcon {
+  width: 25px;
+  height: 25px;
+  font-size: 20px;
+  border: 1px solid;
+  border-radius: 50%;
+  color: rgb(129, 125, 125);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.writeInput {
+  font-size: 30px;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.writeInput::placeholder {
+  color: rgb(189, 185, 185);
+  font-weight: 400;
+}
+
+.fileInputBox {
+  /* background-color: dodgerblue; */
+  width: 71%;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.writeInput:focus {
+  outline-style: none;
+}
+
+.writeText {
+  width: 70vw;
+  height: 100vh;
+  font-family: inherit;
+  font-size: 20px;
+}
+
+.writeSubmit {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  /* color: white; */
+  /* background-color: teal; */
+  padding: 10px;
+  /* border: none; */
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  /* display: flex; */
+  /* align-items: center; */
+}
+
+.categoriesSelect {
+  width: 71%;
+}
+
+.markDownContainer {
+  padding: 10px 0;
+}
+
+.markDownHeader {
+  background-color: wheat;
+  text-align: center;
+  padding: 6px 0;
+}
+
+.markDownHeader h3 {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.markDownHeader p {
+  font-size: 17px;
+}
+
+.markDownTextContainer {
+  margin-top: 10px;
+  padding: 0 20px;
+  display: flex;
+  min-height: 100vh;
+}
+
+.markDownInput {
+  flex: 1;
+  padding: 10px 20px;
+  font-family: inherit;
+  font-size: 20px;
+  outline: none;
+  min-height: 100vh;
+}
+
+.markDownText {
+  padding: 10px 30px;
+  background-color: #000;
+  flex: 1;
+  color: #eee;
+  font-size: 20px;
+  word-break: break-all;
+}
+
+.markDownText > * {
+  color: white;
+}
+
+.markDownText img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.noImage {
+  border: 1px dashed #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 250px;
+}
+
+.noImage div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

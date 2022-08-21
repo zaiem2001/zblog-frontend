@@ -1,0 +1,122 @@
+.singlePost {
+  flex: 9;
+}
+
+.singlePostWrapper {
+  padding: 20px;
+  padding-right: 0;
+}
+
+.singlePostImg {
+  width: 100%;
+  height: 300px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.singlePostTitle,
+.commentTitle {
+  text-align: center;
+  margin: 10px;
+  font-size: 28px;
+  font-family: "Lora", sans-serif;
+  color: #cbcbcb;
+}
+
+.singlePostEdit {
+  float: right;
+  font-size: 16px;
+}
+
+.singlePostIcon {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.singlePostIcon:first-child {
+  color: teal;
+}
+.singlePostIcon:last-child {
+  color: tomato;
+}
+
+.singlePostInfo {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  color: #be9656;
+  font-family: "Varela Round", Arial, Helvetica, sans-serif;
+}
+
+.singlePostAuthor {
+  margin-left: 5px;
+}
+
+.singlePostDesc {
+  padding: 0 20px;
+  font-size: 18px;
+  line-height: 25px;
+  min-height: 200px;
+  color: #666 !important;
+}
+
+.singlePostDesc > * {
+  color: #666 !important;
+}
+
+.Postcomments {
+  display: flex;
+  flex-direction: column;
+}
+
+.postCommentsWrapper {
+  padding: 5px 0;
+  margin-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.commentInputBox {
+  width: 100%;
+  /* border: 1px solid cadetblue; */
+  border-bottom: 1px solid #cbcbcb;
+  margin-bottom: 10px;
+}
+
+.commentInputBox input {
+  padding: 10px 20px;
+  width: 100%;
+  border: none;
+  font-size: 25px;
+  font-family: inherit;
+  outline: none;
+}
+
+.likesCount {
+  margin-left: 10px;
+}
+
+.noComments {
+  width: 100%;
+  padding: 15px;
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+  text-align: center;
+}
+
+.loggedInModal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  font-family: cursive;
+  font-size: 20px;
+}
+
+.singlePostDesc img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
