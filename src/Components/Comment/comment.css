@@ -36,3 +36,10 @@
   flex: 10;
   align-items: center;
 }
+
+.commentBy {
+  color: #cbcbcb;
+  font-weight: bold;
+  margin: 0;
+  margin-right: 20px;
+}

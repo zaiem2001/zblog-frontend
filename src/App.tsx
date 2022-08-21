@@ -42,7 +42,7 @@ const App: React.FC = () => {
           path="/settings"
           element={
             isLoggedIn ? (
-              <Settings user={user} setUser={setUser} />
+              <Settings user={user} setUser={setUser} logout={logout} />
             ) : (
               <Navigate to="/login" replace />
             )

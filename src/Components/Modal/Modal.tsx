@@ -7,6 +7,7 @@ interface Props {
   onCancel?: () => any;
   children: React.ReactNode;
   title?: string;
+  [key: string]: any;
 }
 
 const CustomModal: React.FC<Props> = ({

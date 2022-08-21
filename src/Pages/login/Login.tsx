@@ -30,6 +30,7 @@ const Login: React.FC = () => {
           placeholder="Enter your email..."
           onChange={(e) => setEmail(e.target.value)}
         />
+
         <label>Password</label>
         <input
           className="loginInput"

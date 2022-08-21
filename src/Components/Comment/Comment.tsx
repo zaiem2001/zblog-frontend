@@ -16,11 +16,11 @@ const Comment: React.FC<Props> = ({ commentObj }) => {
       <div className="left">
         <div className="userImage">
           <img
-            src={commentObj?.user?.profilePicture}
-            alt={commentObj?.user?.username}
+            src={commentObj?.user?.profilePicture || "/assets/noAvatar.png"}
+            alt={commentObj?.user?.username || "user"}
           />
         </div>
-
+        <p className="commentBy">{commentObj?.user?.username || "User"}</p>
         <p className="userComment">{commentObj?.comment}</p>
       </div>
 

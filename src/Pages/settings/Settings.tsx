@@ -1,39 +1,56 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useLazyLoadQuery, useMutation } from "react-relay";
 import { Button, Progress } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
 
 import { UpdateUserMutation } from "../../Queries/User/__generated__/UpdateUserMutation.graphql";
+import { DeleteUserMutation } from "../../Queries/User/__generated__/DeleteUserMutation.graphql";
+import { GetBlogsQuery } from "../../Queries/Blog/__generated__/GetBlogsQuery.graphql";
+import { DeleteUser } from "../../Queries/User/Delete";
+import { UpdateMutation } from "../../Queries/User/Update";
+import { GetBlogs } from "../../Queries/Blog/GetBlogs";
 
 import SidebarNav from "../../Components/sidebar/SideBarNav";
 import { User } from "../../Constants/Interfaces";
-import { UpdateMutation } from "../../Queries/User/Update";
 import { useUploadFile } from "../../Hooks/UseUploadFile";
 import "./settings.css";
 import Message from "../../Components/Message/Message";
-import { GetBlogsQuery } from "../../Queries/Blog/__generated__/GetBlogsQuery.graphql";
-import { GetBlogs } from "../../Queries/Blog/GetBlogs";
 import Posts from "../../Components/posts/Posts";
 import { timeAgoFormat } from "../../Utils/helpers";
+import CustomModal from "../../Components/Modal/Modal";
+import UseDocumentTitle from "../../Hooks/UseDocumentTitle";
 
 interface Props {
   user: User;
   setUser: (args: any) => any;
+  logout: () => any;
 }
 
-const Settings: React.FC<Props> = ({ user, setUser }) => {
+const Settings: React.FC<Props> = ({ user, setUser, logout }) => {
+  const navigate = useNavigate();
+  const { adding, progress, upload } = useUploadFile();
+  UseDocumentTitle(`${user?.username} | Profile`);
+
   const [file, setFile] = useState<File | null>(null);
   const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
 
-  const blogsRef = useLazyLoadQuery<GetBlogsQuery>(GetBlogs, {
-    filter: { user: user.id },
-  });
+  const [visible, setVisible] = useState(false);
+
+  const blogsRef = useLazyLoadQuery<GetBlogsQuery>(
+    GetBlogs,
+    {
+      filter: { user: user.id },
+    },
+    { fetchPolicy: "store-and-network" }
+  );
 
   const [commitUpdate, isUpdating] =
     useMutation<UpdateUserMutation>(UpdateMutation);
 
-  const { adding, progress, upload } = useUploadFile();
+  const [commitDelete, isDeleting] =
+    useMutation<DeleteUserMutation>(DeleteUser);
 
   const handleUpdateData = (url: string | null = null) => {
     commitUpdate({
@@ -87,6 +104,31 @@ const Settings: React.FC<Props> = ({ user, setUser }) => {
     }
   };
 
+  const handleCancel = () => {
+    if (isDeleting) return;
+
+    setVisible(false);
+  };
+
+  const handleOk = () => {
+    if (isDeleting) return;
+
+    commitDelete({
+      variables: {},
+      onCompleted(response, errors) {
+        if (errors?.length) {
+          Message({ text: errors[0].message });
+        }
+
+        if (response.user) {
+          Message({ text: "Account Deleted Successfully!", type: "success" });
+          logout();
+          navigate("/");
+        }
+      },
+    });
+  };
+
   return (
     <div className="settings">
       <div className="settingsWrapper">
@@ -99,7 +141,12 @@ const Settings: React.FC<Props> = ({ user, setUser }) => {
               : "Never"}
             )
           </span>
-          <span className="settingsTitleDelete">Delete Account</span>
+          <span
+            className="settingsTitleDelete"
+            onClick={() => setVisible((prev) => !prev)}
+          >
+            Delete Account
+          </span>
         </div>
         <form className="settingsForm" onSubmit={handleSubmit}>
           <label>Profile Picture</label>
@@ -200,6 +247,17 @@ const Settings: React.FC<Props> = ({ user, setUser }) => {
         </div>
       </div>
       <SidebarNav />
+
+      <CustomModal
+        title="This action is Irreversible!"
+        visible={visible}
+        onOk={handleOk}
+        confirmLoading={isDeleting}
+        onCancel={handleCancel}
+        okText="Delete"
+      >
+        <p>Are you sure you want to Delete the account ?</p>
+      </CustomModal>
     </div>
   );
 };

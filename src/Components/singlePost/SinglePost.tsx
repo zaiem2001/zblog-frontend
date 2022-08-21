@@ -14,6 +14,7 @@ import "./singlePost.css";
 import { CommentOnBlog } from "../../Queries/Blog/Mutations/Comment";
 import { CommentOnBlogMutation } from "../../Queries/Blog/Mutations/__generated__/CommentOnBlogMutation.graphql";
 import CustomModal from "../Modal/Modal";
+import UseDocumentTitle from "../../Hooks/UseDocumentTitle";
 
 interface Props {
   blogRef: any;
@@ -21,22 +22,21 @@ interface Props {
 
 const SinglePost: React.FC<Props> = ({ blogRef }) => {
   const { user, isLoggedIn } = useContext(UserContext);
-
   const navigate = useNavigate();
+
+  const blog = useFragment(SingleBlogFragment, blogRef.blog);
+  const [commitLike, isLiking] = useMutation<LikeBlogMutation>(LikeUnlikeBlog);
+  const [commitComment, isCommenting] =
+    useMutation<CommentOnBlogMutation>(CommentOnBlog);
+
+  UseDocumentTitle(`Z-${blog?.title}`);
 
   const [comment, setComment] = useState("");
   const [visible, setVisible] = useState(false);
 
-  const [commitLike, isLiking] = useMutation<LikeBlogMutation>(LikeUnlikeBlog);
-
-  const blog = useFragment(SingleBlogFragment, blogRef.blog);
-
   const alreadyLiked = isLoggedIn
     ? blog?.likes.some((like: any) => like.id === user.id)
     : false;
-
-  const [commitComment, isCommenting] =
-    useMutation<CommentOnBlogMutation>(CommentOnBlog);
 
   const handleComment = (e: React.FormEvent) => {
     e.preventDefault();
@@ -112,7 +112,10 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
             <span>
               Author:
               <b className="singlePostAuthor">
-                <Link className="link" to="/posts?username=Safak">
+                <Link
+                  className="link"
+                  to={`/posts?username=${blog?.user?.username}`}
+                >
                   {blog?.user?.username}
                 </Link>
               </b>

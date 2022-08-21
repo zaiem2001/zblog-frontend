@@ -20,7 +20,7 @@ const Homepage: React.FC = () => {
   const blogsRef = useLazyLoadQuery<GetBlogsQuery>(
     GetBlogs,
     { filter: {} },
-    { fetchPolicy: "store-or-network" }
+    { fetchPolicy: "store-and-network" }
   );
 
   return (

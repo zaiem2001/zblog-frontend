@@ -19,7 +19,7 @@ const Single: React.FC = () => {
       id,
     },
     {
-      fetchPolicy: "network-only",
+      fetchPolicy: "store-and-network",
     }
   );
 
