@@ -28,3 +28,24 @@ export const SingleBlogFragment = graphql`
     }
   }
 `;
+
+export const blogPaginationFragment = graphql`
+  fragment GetBlogPagination_query on Query
+  @refetchable(queryName: "GetBlogsPaginatedQuery") {
+    blogs(after: $after, first: $first, filter: $filter, sortBy: $sortBy)
+      @connection(key: "Blogs_query_user_blogs") {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+      totalCount
+      edges {
+        node {
+          ...GetBlog_blog
+        }
+      }
+    }
+  }
+`;

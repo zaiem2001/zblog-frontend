@@ -4,14 +4,12 @@ import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-import { GetBlogs_blog$key } from "../../Queries/Blog/__generated__/GetBlogs_blog.graphql";
-
-import { BlogsFragment } from "../../Queries/Blog/GetBlogs";
-import "./post.css";
 import { timeAgoFormat } from "../../Utils/helpers";
+import { SingleBlogFragment } from "../../Queries/Blog/GetBlog.fragment";
+import "./post.css";
 
 interface PostProps {
-  blog: GetBlogs_blog$key;
+  blog: any;
 }
 
 const getFormattedURL = (url: string) => {
@@ -19,7 +17,7 @@ const getFormattedURL = (url: string) => {
 };
 
 const Post: React.FC<PostProps> = ({ blog }) => {
-  const fragmentData = useFragment(BlogsFragment, blog);
+  const fragmentData = useFragment(SingleBlogFragment, blog.node);
 
   return (
     <div className="post">
@@ -31,7 +29,7 @@ const Post: React.FC<PostProps> = ({ blog }) => {
 
       <div className="postInfo">
         <div className="postCats">
-          {fragmentData?.categories?.map((category) => (
+          {fragmentData?.categories?.map((category: string) => (
             <span className="postCat" key={category}>
               {category}
             </span>
