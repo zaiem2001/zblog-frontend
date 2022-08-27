@@ -1,20 +1,25 @@
 import React, { useContext, useState } from "react";
 import { useFragment, useMutation } from "react-relay";
 import { Link, useNavigate } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 import { SingleBlogFragment } from "../../Queries/Blog/GetBlog.fragment";
 import { LikeBlogMutation } from "../../Queries/Blog/Mutations/__generated__/LikeBlogMutation.graphql";
 import { LikeUnlikeBlog } from "../../Queries/Blog/Mutations/LikeBlog";
+import { DeleteBlog } from "../../Queries/Blog/Mutations/DeleteBlog";
+import { CommentOnBlog } from "../../Queries/Blog/Mutations/Comment";
+import { CommentOnBlogMutation } from "../../Queries/Blog/Mutations/__generated__/CommentOnBlogMutation.graphql";
+import { DeleteBlogMutation } from "../../Queries/Blog/Mutations/__generated__/DeleteBlogMutation.graphql";
 
 import Comment from "../Comment/Comment";
 import { timeAgoFormat } from "../../Utils/helpers";
 import { User } from "../../Constants/Interfaces";
 import { UserContext } from "../../Context/AuthContext";
 import "./singlePost.css";
-import { CommentOnBlog } from "../../Queries/Blog/Mutations/Comment";
-import { CommentOnBlogMutation } from "../../Queries/Blog/Mutations/__generated__/CommentOnBlogMutation.graphql";
 import CustomModal from "../Modal/Modal";
 import UseDocumentTitle from "../../Hooks/UseDocumentTitle";
+import Message from "../Message/Message";
 
 interface Props {
   blogRef: any;
@@ -29,14 +34,19 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
   const [commitComment, isCommenting] =
     useMutation<CommentOnBlogMutation>(CommentOnBlog);
 
+  const [commitDelet, isDeleting] = useMutation<DeleteBlogMutation>(DeleteBlog);
+
   UseDocumentTitle(`Z-${blog?.title}`);
 
   const [comment, setComment] = useState("");
   const [visible, setVisible] = useState(false);
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 
   const alreadyLiked = isLoggedIn
     ? blog?.likes.some((like: any) => like.id === user.id)
     : false;
+
+  const isBlogOwner = isLoggedIn ? blog.user.id === user.id : false;
 
   const handleComment = (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,6 +98,29 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
     navigate("/login", { replace: true });
   };
 
+  const handleCancel = () => {
+    if (isDeleting) return;
+
+    setDeleteModalVisible(false);
+  };
+
+  const handleDelete = () => {
+    commitDelet({
+      variables: { blogId: blog.id },
+      onCompleted(response, errors) {
+        if (errors?.length) {
+          Message({ text: "Something went wrong!" });
+          setDeleteModalVisible(false);
+          return;
+        }
+
+        Message({ text: "Blog deleted successfully.", type: "success" });
+        setDeleteModalVisible(false);
+        navigate("/", { replace: true });
+      },
+    });
+  };
+
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
@@ -103,8 +136,17 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
                   : "singlePostIcon far fa-heart"
               }
             ></i>
-            <i className="singlePostIcon far fa-edit"></i>
-            <i className="singlePostIcon far fa-trash-alt"></i>
+
+            {isBlogOwner && (
+              <>
+                <i className="singlePostIcon far fa-edit"></i>
+
+                <i
+                  className="singlePostIcon far fa-trash-alt"
+                  onClick={() => setDeleteModalVisible((prev) => !prev)}
+                ></i>
+              </>
+            )}
           </div>
         </h1>
         <div className="singlePostInfo">
@@ -128,12 +170,11 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
           </div>
           <span>{timeAgoFormat(blog?.createdAt)}</span>
         </div>
-        <div
-          className="singlePostDesc"
-          dangerouslySetInnerHTML={{
-            __html: blog?.description,
-          }}
-        ></div>
+        <div className="singlePostDesc">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {blog?.description}
+          </ReactMarkdown>
+        </div>
 
         <div className="postCommentsWrapper">
           <h1 className="commentTitle">Comments</h1>
@@ -175,6 +216,17 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
         <div className="loggedInModal">
           <p>Login to Like or Comment on the Blog.</p>
         </div>
+      </CustomModal>
+
+      <CustomModal
+        title="This action is Irreversible!"
+        visible={deleteModalVisible}
+        onOk={handleDelete}
+        confirmLoading={isDeleting}
+        onCancel={handleCancel}
+        okText="Delete"
+      >
+        <p>Are you sure you want to Delete the Blog ?</p>
       </CustomModal>
     </div>
   );

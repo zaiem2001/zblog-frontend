@@ -42,11 +42,11 @@ const Write: React.FC = () => {
     setCategories(value);
   };
 
-  const handleSubmit = (url: string, blogString: string) => {
+  const handleSubmit = (url: string) => {
     commitBlog({
       variables: {
         input: {
-          description: blogString,
+          description: markDown,
           title,
           image: url,
           categories,
@@ -72,14 +72,13 @@ const Write: React.FC = () => {
   const handlePublish = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const blogString = document.getElementById("markDownText")?.innerHTML!;
-
-    if (!categories.length || !file || !title.trim() || !blogString.length) {
+    if (!categories.length || !file || !title.trim() || !markDown.length) {
       Message({ text: "All the fields are required" });
       return;
     }
 
-    upload(file, (url) => handleSubmit(url, blogString));
+    console.log(markDown);
+    upload(file, (url) => handleSubmit(url));
   };
 
   return (

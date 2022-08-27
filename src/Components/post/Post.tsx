@@ -1,6 +1,8 @@
 import React from "react";
 import { useFragment } from "react-relay";
 import { Link } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 import { GetBlogs_blog$key } from "../../Queries/Blog/__generated__/GetBlogs_blog.graphql";
 
@@ -51,12 +53,11 @@ const Post: React.FC<PostProps> = ({ blog }) => {
           {timeAgoFormat(fragmentData?.createdAt)}
         </span>
       </div>
-      <p
-        className="postDesc"
-        dangerouslySetInnerHTML={{
-          __html: fragmentData?.description,
-        }}
-      ></p>
+      <p className="postDesc">
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {fragmentData?.description}
+        </ReactMarkdown>
+      </p>
     </div>
   );
 };

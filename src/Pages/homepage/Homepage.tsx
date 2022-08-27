@@ -1,12 +1,10 @@
 import React from "react";
 import { useLazyLoadQuery } from "react-relay";
-// import { useLocation } from "react-router-dom";
 import Header from "../../Components/header/Header";
 
 import type { GetBlogsQuery } from "../../Queries/Blog/__generated__/GetBlogsQuery.graphql";
 
 import Posts from "../../Components/posts/Posts";
-import SidebarNav from "../../Components/sidebar/SideBarNav";
 import UseDocumentTitle from "../../Hooks/UseDocumentTitle";
 import { GetBlogs } from "../../Queries/Blog/GetBlogs";
 
@@ -28,7 +26,6 @@ const Homepage: React.FC = () => {
       <Header />
       <div className="home">
         <Posts blogsRef={blogsRef} />
-        <SidebarNav />
       </div>
     </>
   );
