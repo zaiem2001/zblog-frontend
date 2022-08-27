@@ -1,23 +1,32 @@
 import React from "react";
+import { graphql } from "babel-plugin-relay/macro";
 import { useLazyLoadQuery } from "react-relay";
 import Header from "../../Components/header/Header";
 
-import type { GetBlogsQuery } from "../../Queries/Blog/__generated__/GetBlogsQuery.graphql";
+import { GetBlogsPaginatedQuery } from "../../Queries/Blog/__generated__/GetBlogsPaginatedQuery.graphql";
 
-import Posts from "../../Components/posts/Posts";
 import UseDocumentTitle from "../../Hooks/UseDocumentTitle";
-import { GetBlogs } from "../../Queries/Blog/GetBlogs";
-
+import Posts from "../../Components/posts/Posts";
 import "./homepage.css";
 
 const Homepage: React.FC = () => {
-  // const location = useLocation();
-
   UseDocumentTitle("Z Blog - Homepage");
 
-  const blogsRef = useLazyLoadQuery<GetBlogsQuery>(
-    GetBlogs,
-    { filter: {} },
+  const blogsRef = useLazyLoadQuery<GetBlogsPaginatedQuery>(
+    graphql`
+      query HomepageQuery(
+        $after: String
+        $first: Int
+        $filter: FilterInput
+        $sortBy: SortInput
+      ) {
+        ...GetBlogPagination_query
+      }
+    `,
+    {
+      filter: {},
+      first: 6,
+    },
     { fetchPolicy: "store-and-network" }
   );
 

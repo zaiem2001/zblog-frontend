@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { graphql } from "babel-plugin-relay/macro";
 import { useNavigate } from "react-router-dom";
 import { useLazyLoadQuery, useMutation } from "react-relay";
 import { Button, Progress } from "antd";
@@ -6,20 +7,19 @@ import { CloseCircleOutlined } from "@ant-design/icons";
 
 import { UpdateUserMutation } from "../../Queries/User/__generated__/UpdateUserMutation.graphql";
 import { DeleteUserMutation } from "../../Queries/User/__generated__/DeleteUserMutation.graphql";
-import { GetBlogsQuery } from "../../Queries/Blog/__generated__/GetBlogsQuery.graphql";
 import { DeleteUser } from "../../Queries/User/Delete";
 import { UpdateMutation } from "../../Queries/User/Update";
-import { GetBlogs } from "../../Queries/Blog/GetBlogs";
+import { SettingsPageQuery } from "./__generated__/SettingsPageQuery.graphql";
 
-import SidebarNav from "../../Components/sidebar/SideBarNav";
-import { User } from "../../Constants/Interfaces";
 import { useUploadFile } from "../../Hooks/UseUploadFile";
-import "./settings.css";
+import UseDocumentTitle from "../../Hooks/UseDocumentTitle";
+import SidebarNav from "../../Components/sidebar/SideBarNav";
 import Message from "../../Components/Message/Message";
 import Posts from "../../Components/posts/Posts";
-import { timeAgoFormat } from "../../Utils/helpers";
 import CustomModal from "../../Components/Modal/Modal";
-import UseDocumentTitle from "../../Hooks/UseDocumentTitle";
+import { timeAgoFormat } from "../../Utils/helpers";
+import { User } from "../../Constants/Interfaces";
+import "./settings.css";
 
 interface Props {
   user: User;
@@ -38,10 +38,20 @@ const Settings: React.FC<Props> = ({ user, setUser, logout }) => {
 
   const [visible, setVisible] = useState(false);
 
-  const blogsRef = useLazyLoadQuery<GetBlogsQuery>(
-    GetBlogs,
+  const blogsRef = useLazyLoadQuery<SettingsPageQuery>(
+    graphql`
+      query SettingsPageQuery(
+        $after: String
+        $first: Int
+        $filter: FilterInput
+        $sortBy: SortInput
+      ) {
+        ...GetBlogPagination_query
+      }
+    `,
     {
       filter: { user: user.id },
+      first: 6,
     },
     { fetchPolicy: "store-and-network" }
   );
@@ -136,10 +146,7 @@ const Settings: React.FC<Props> = ({ user, setUser, logout }) => {
           <span className="settingsTitleUpdate">Update Your Account</span>
           <span className="lastUpdatedInfo">
             Last Updated (
-            {user?.updatedAt
-              ? timeAgoFormat(Date.parse(user?.updatedAt).toString())
-              : "Never"}
-            )
+            {user?.updatedAt ? timeAgoFormat(user?.updatedAt) : "Never"})
           </span>
           <span
             className="settingsTitleDelete"

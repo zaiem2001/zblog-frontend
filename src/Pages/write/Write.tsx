@@ -92,7 +92,10 @@ const Write: React.FC = () => {
 
             <DeleteOutlined
               className="deleteBlogImg"
-              onClick={() => setFile(null)}
+              onClick={() => {
+                if (isPublishing || adding) return;
+                setFile(null);
+              }}
             />
 
             {adding ? (

@@ -1,6 +1,5 @@
 import React from "react";
-import InfiniteScroll from "react-infinite-scroller";
-
+import { StyledInfiniteScrollContainer } from "./infiniteScroll.styled";
 interface Props {
   children: React.ReactNode;
   loadMore: () => any;
@@ -15,11 +14,14 @@ const StyledInfiniteScroll: React.FC<Props> = ({
   loader,
 }) => {
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <InfiniteScroll loadMore={loadMore} hasMore={hasMore} loader={loader}>
-        {children}
-      </InfiniteScroll>
-    </div>
+    <StyledInfiniteScrollContainer
+      loadMore={loadMore}
+      hasMore={hasMore}
+      loader={loader}
+      // style={{ display: "flex", flexWrap: "wrap" }}
+    >
+      {children}
+    </StyledInfiniteScrollContainer>
   );
 };
 
