@@ -1,13 +1,18 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
 
+const API_KEY = process.env.REACT_APP_FIREBASE_API_KEY!;
+const PROJECT_ID = process.env.REACT_APP_FIREBASE_PROJECT_ID!;
+const SENDER_ID = process.env.REACT_APP_FIREBASE_SENDER_ID!;
+const APP_ID = process.env.REACT_APP_FIREBASE_APP_ID!;
+
 export const firebaseConfig = {
-  apiKey: "AIzaSyDCf4-UWISD-EmROtRQ2gncr9avSsJeQmU",
+  apiKey: API_KEY,
   authDomain: "z-blog-369a2.firebaseapp.com",
-  projectId: "z-blog-369a2",
+  projectId: PROJECT_ID,
   storageBucket: "z-blog-369a2.appspot.com",
-  messagingSenderId: "411410274070",
-  appId: "1:411410274070:web:d2f757330755a3bf9ca237",
+  messagingSenderId: SENDER_ID,
+  appId: APP_ID,
 };
 
 firebase.initializeApp(firebaseConfig);

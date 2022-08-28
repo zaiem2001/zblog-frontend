@@ -1,3 +1,5 @@
+import { localStorageKeys } from "../Constants/constants";
+
 export const getToken = () => {
-  return localStorage.getItem("zblog-token");
+  return localStorage.getItem(localStorageKeys.token);
 };

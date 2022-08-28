@@ -17,9 +17,18 @@ import SidebarNav from "../../Components/sidebar/SideBarNav";
 import Message from "../../Components/Message/Message";
 import Posts from "../../Components/posts/Posts";
 import CustomModal from "../../Components/Modal/Modal";
+import "./settings.css";
+import {
+  StyledContainer,
+  StyledFormContainer,
+  StyledTitle,
+  StyledUserBlogsContainer,
+  StyledUserBlogsTitle,
+  StyledWrapper,
+} from "./Settings.styled";
 import { timeAgoFormat } from "../../Utils/helpers";
 import { User } from "../../Constants/Interfaces";
-import "./settings.css";
+import { localStorageKeys } from "../../Constants/constants";
 
 interface Props {
   user: User;
@@ -81,7 +90,10 @@ const Settings: React.FC<Props> = ({ user, setUser, logout }) => {
 
         if (response.user) {
           setUser(response.user);
-          localStorage.setItem("zblog-user", JSON.stringify(response.user));
+          localStorage.setItem(
+            localStorageKeys.user,
+            JSON.stringify(response.user)
+          );
           Message({ text: "Update success", type: "success" });
           setFile(null);
         }
@@ -140,22 +152,20 @@ const Settings: React.FC<Props> = ({ user, setUser, logout }) => {
   };
 
   return (
-    <div className="settings">
-      <div className="settingsWrapper">
-        <div className="settingsTitle">
-          <span className="settingsTitleUpdate">Update Your Account</span>
-          <span className="lastUpdatedInfo">
+    <StyledContainer>
+      <StyledWrapper>
+        <StyledTitle>
+          <span>Update Your Account</span>
+          <span>
             Last Updated (
             {user?.updatedAt ? timeAgoFormat(user?.updatedAt) : "Never"})
           </span>
-          <span
-            className="settingsTitleDelete"
-            onClick={() => setVisible((prev) => !prev)}
-          >
+          <span onClick={() => setVisible((prev) => !prev)}>
             Delete Account
           </span>
-        </div>
-        <form className="settingsForm" onSubmit={handleSubmit}>
+        </StyledTitle>
+
+        <StyledFormContainer onSubmit={handleSubmit}>
           <label>Profile Picture</label>
           <div className="image-actions">
             <div className="settingsPP">
@@ -241,18 +251,18 @@ const Settings: React.FC<Props> = ({ user, setUser, logout }) => {
           >
             Update
           </Button>
-        </form>
+        </StyledFormContainer>
 
-        <div className="userBlogs">
-          <div className="userBlogs__title">
+        <StyledUserBlogsContainer>
+          <StyledUserBlogsTitle>
             <h2> Your Blogs</h2>
-          </div>
+          </StyledUserBlogsTitle>
 
           <div className="userBlogs__container">
             <Posts blogsRef={blogsRef} />
           </div>
-        </div>
-      </div>
+        </StyledUserBlogsContainer>
+      </StyledWrapper>
       <SidebarNav />
 
       <CustomModal
@@ -265,7 +275,7 @@ const Settings: React.FC<Props> = ({ user, setUser, logout }) => {
       >
         <p>Are you sure you want to Delete the account ?</p>
       </CustomModal>
-    </div>
+    </StyledContainer>
   );
 };
 

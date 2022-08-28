@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useMutation } from "react-relay";
-import { Button, Progress } from "antd";
-import { CloudDownloadOutlined, DeleteOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+import { Progress } from "antd";
+import { CloudDownloadOutlined } from "@ant-design/icons";
 
 import { CreateBlogMutation } from "../../Queries/Blog/Mutations/__generated__/CreateBlogMutation.graphql";
 import { CreateUserBlogMutation } from "../../Queries/Blog/Mutations/CreateBlog";
@@ -11,10 +12,22 @@ import { CreateUserBlogMutation } from "../../Queries/Blog/Mutations/CreateBlog"
 import { useUploadFile } from "../../Hooks/UseUploadFile";
 import UseDocumentTitle from "../../Hooks/UseDocumentTitle";
 import MultiSelect from "../../Components/Select/MultiSelect";
-import { CATEGORIES, exampleMarkdownText } from "../../Constants/constants";
 import "./write.css";
 import Message from "../../Components/Message/Message";
-import { useNavigate } from "react-router-dom";
+import {
+  StyledBlogImage,
+  StyledButton,
+  StyledContainer,
+  StyledDeleteOutlined,
+  StyledFormContainer,
+  StyledImageContainer,
+  StyledMarkdown,
+  StyledMarkdownContainer,
+  StyledMarkdownHeader,
+  StyledNoImage,
+  StyledSubmitButton,
+} from "./Write.styled";
+import { CATEGORIES, exampleMarkdownText } from "../../Constants/constants";
 
 const Write: React.FC = () => {
   UseDocumentTitle("Z Blog - Create New Blog");
@@ -82,16 +95,15 @@ const Write: React.FC = () => {
   };
 
   return (
-    <div className="write">
-      <form className="writeForm" onSubmit={handlePublish}>
+    <StyledContainer>
+      <StyledFormContainer onSubmit={handlePublish}>
         {file ? (
-          <div className="blogImageContainer">
-            <div className="blogImage">
+          <StyledImageContainer>
+            <StyledBlogImage>
               <img src={URL.createObjectURL(file)} alt="blog_image" />
-            </div>
+            </StyledBlogImage>
 
-            <DeleteOutlined
-              className="deleteBlogImg"
+            <StyledDeleteOutlined
               onClick={() => {
                 if (isPublishing || adding) return;
                 setFile(null);
@@ -113,9 +125,9 @@ const Write: React.FC = () => {
             ) : (
               <></>
             )}
-          </div>
+          </StyledImageContainer>
         ) : (
-          <div className="writeImg noImage">
+          <StyledNoImage>
             <div>
               <label htmlFor="fileInput">
                 <i className="writeIcon fas fa-plus"></i>
@@ -133,7 +145,7 @@ const Write: React.FC = () => {
               />
               <p> Choose Image</p>
             </div>
-          </div>
+          </StyledNoImage>
         )}
         <div className="writeFormGroup fileInputBox">
           <input
@@ -150,7 +162,7 @@ const Write: React.FC = () => {
         </div>
 
         <div className="markDownContainer">
-          <div className="markDownHeader">
+          <StyledMarkdownHeader>
             <h3>You can write Markdown text here. like Github Readme.md</h3>
             <p>
               You can refer{" "}
@@ -163,9 +175,9 @@ const Write: React.FC = () => {
               </a>{" "}
               for the Markdown CheatSheet.
             </p>
-          </div>
+          </StyledMarkdownHeader>
 
-          <div className="markDownTextContainer">
+          <StyledMarkdownContainer className="markDownTextContainer">
             <textarea
               className="markDownInput"
               placeholder="Write your Blog..."
@@ -174,16 +186,16 @@ const Write: React.FC = () => {
               onChange={(e) => setMarkDown(e.target.value)}
             />
 
-            <div className="markDownText" id="markDownText">
+            <StyledMarkdown>
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {markDown}
               </ReactMarkdown>
-            </div>
-          </div>
+            </StyledMarkdown>
+          </StyledMarkdownContainer>
         </div>
 
-        <div className="writeSubmit">
-          <Button
+        <StyledSubmitButton>
+          <StyledButton
             size="large"
             ghost
             icon={<CloudDownloadOutlined />}
@@ -191,10 +203,10 @@ const Write: React.FC = () => {
             loading={isPublishing || adding}
           >
             Publish
-          </Button>
-        </div>
-      </form>
-    </div>
+          </StyledButton>
+        </StyledSubmitButton>
+      </StyledFormContainer>
+    </StyledContainer>
   );
 };
 

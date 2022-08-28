@@ -1,18 +1,23 @@
 import React from "react";
-import "./header.css";
+
+import {
+  StyledContainer,
+  StyledHeaderTitles,
+  StyledImgBox,
+} from "./Header.styled";
 
 const Header = () => {
   return (
-    <div className="header">
-      <div className="headerTitles">
-        <span className="headerTitleSm">Z</span>
-        <span className="headerTitleLg">BLOG</span>
-      </div>
+    <StyledContainer>
+      <StyledHeaderTitles>
+        <span>Z</span>
+        <span>BLOG</span>
+      </StyledHeaderTitles>
 
-      <div className="headerImgBox">
-        <img className="headerImg" src="/assets/car.jpg" alt="" />
-      </div>
-    </div>
+      <StyledImgBox>
+        <img src="/assets/car.jpg" alt="" />
+      </StyledImgBox>
+    </StyledContainer>
   );
 };
 

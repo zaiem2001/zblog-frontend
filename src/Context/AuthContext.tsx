@@ -8,6 +8,8 @@ interface UserContextInterface {
   user: any;
   isLoading: boolean;
   setUser: (args: any) => any;
+  isDarkMode: boolean;
+  toggleDarkMode: () => void;
 }
 
 const initialValues = {
@@ -17,6 +19,8 @@ const initialValues = {
   login: () => {},
   logout: () => {},
   setUser: (args: any) => {},
+  isDarkMode: false,
+  toggleDarkMode: () => {},
 };
 
 export const UserContext = createContext<UserContextInterface>(initialValues);
