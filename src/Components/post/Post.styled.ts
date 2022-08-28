@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const StyledContainer = styled.div`
@@ -62,5 +63,16 @@ export const StyledPostDescription = styled.div`
 
   > * {
     color: ${(props) => props.theme.descColor};
+  }
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+
+  img {
+    width: 385px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 7px;
   }
 `;

@@ -7,6 +7,13 @@ export const StyledContainer = styled.div`
 export const StyledWrapper = styled.div`
   padding: 20px;
   padding-right: 0;
+
+  img {
+    width: 100%;
+    height: 300px;
+    border-radius: 5px;
+    object-fit: contain;
+  }
 `;
 
 export const StyledTitle = styled.div`
@@ -92,4 +99,9 @@ export const StyledLoggedInModal = styled.div`
   justify-content: center;
   font-family: cursive;
   font-size: 20px;
+`;
+
+export const StyledPostEdit = styled.div`
+  float: right;
+  font-size: 16px;
 `;

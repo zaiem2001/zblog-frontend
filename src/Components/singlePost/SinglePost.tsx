@@ -34,6 +34,7 @@ import {
   StyledTitle,
   StyledWrapper,
 } from "./SinglePost.styled";
+import { StyledPostEdit } from "./SinglePost.styled";
 
 interface Props {
   blogRef: any;
@@ -138,13 +139,13 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
   return (
     <StyledContainer>
       <StyledWrapper>
-        <img className="singlePostImg" src={blog?.image} alt={blog?.title} />
+        <img src={blog?.image} alt={blog?.title} />
 
         <StyledBlogTitle>
           <span>{blog?.title}</span>
         </StyledBlogTitle>
         <StyledTitle>
-          <div className="singlePostEdit">
+          <StyledPostEdit>
             <i
               onClick={handleLike}
               className={
@@ -164,7 +165,7 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
                 ></i>
               </>
             )}
-          </div>
+          </StyledPostEdit>
         </StyledTitle>
 
         <StyledPostInfo>

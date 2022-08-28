@@ -1,4 +1,7 @@
-.login {
+import { Button } from "antd";
+import styled from "styled-components";
+
+export const StyledContainer = styled.div`
   height: calc(100vh - 50px);
   display: flex;
   flex-direction: column;
@@ -10,52 +13,54 @@
     ),
     url("https://images.pexels.com/photos/768473/pexels-photo-768473.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
   background-size: cover;
-}
 
-.loginTitle {
-  font-size: 50px;
-}
+  .loginTitle {
+    font-size: 50px;
+  }
+`;
 
-.loginForm {
+export const StyledFormContainer = styled.form`
   margin-top: 20px;
   width: 100vw;
   display: flex;
   align-items: center;
   flex-direction: column;
-}
 
-.loginForm > label {
-  font-size: 20px;
-  margin: 10px 0;
-  font-weight: bold;
-}
+  > label {
+    font-size: 20px;
+    margin: 10px 0;
+    font-weight: bold;
+  }
+`;
 
-.loginInput {
+export const StyledInput = styled.input`
   padding: 10px;
   background-color: white;
   border: none;
   width: 50%;
   font-size: 20px;
   font-family: inherit;
-}
 
-.loginInput:focus {
-  outline: none;
-}
+  :focus {
+    outline: none;
+  }
+`;
 
-.loginButton {
+export const StyledButton = styled(Button)`
   margin-top: 20px;
   cursor: pointer;
-  background-color: lightcoral;
   color: white;
-  padding: 10px;
   border: none;
   border-radius: 10px;
   text-align: center;
   width: 20%;
-}
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
-.loginRegisterButton {
+export const StyledRegisterButton = styled.button`
   position: absolute;
   top: 60px;
   right: 20px;
@@ -67,4 +72,4 @@
   font-weight: bold;
   font-family: inherit;
   width: 10%;
-}
+`;

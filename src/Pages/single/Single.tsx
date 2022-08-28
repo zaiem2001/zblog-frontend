@@ -7,8 +7,7 @@ import { GetBlogByTitleQuery } from "../../Queries/Blog/__generated__/GetBlogByT
 
 import SidebarNav from "../../Components/sidebar/SideBarNav";
 import SinglePost from "../../Components/singlePost/SinglePost";
-
-import "./single.css";
+import { StyledContainer } from "./Single.styled";
 
 const Single: React.FC = () => {
   const { id } = useParams();
@@ -24,10 +23,10 @@ const Single: React.FC = () => {
   );
 
   return (
-    <div className="single">
+    <StyledContainer>
       <SinglePost blogRef={singleBlogRef} />
       <SidebarNav />
-    </div>
+    </StyledContainer>
   );
 };
 

@@ -1,4 +1,6 @@
-.sidebar {
+import styled from "styled-components";
+
+export const StyledContainer = styled.div`
   flex: 3;
   height: fit-content;
   margin: 20px;
@@ -10,15 +12,22 @@
   align-items: center;
   position: sticky;
   top: 0;
-}
+`;
 
-.sidebarItem {
+export const StyledSideBarItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-}
 
-.sidebarTitle {
+  img {
+    margin-top: 15px;
+    width: 350px;
+    height: 250px;
+    object-fit: cover;
+  }
+`;
+
+export const StyledTitle = styled.span`
   margin: 10px;
   padding: 5px;
   width: 80%;
@@ -30,42 +39,32 @@
   line-height: 19px;
   color: #cbcbcb;
   font-weight: 600;
-}
+`;
 
-.sidebarItem > img {
-  margin-top: 15px;
-  width: 250px;
-  height: 250px;
-}
-
-.sidebarItem > p {
-  padding: 30px;
-}
-
-.sidebarList {
+export const StyledList = styled.ul`
   list-style-type: none;
   margin-bottom: 30px;
-}
+`;
 
-.sidebarListItem {
+export const StyledListItem = styled.li`
   display: inline-block;
   flex-wrap: wrap;
   width: 50%;
   margin-top: 15px;
   cursor: pointer;
   color: #eee;
-}
+`;
 
-.sidebarSocial {
+export const StyledSocial = styled.div`
   margin-top: 15px;
   width: 250px;
   display: flex;
   align-items: center;
   color: white;
   justify-content: center;
-}
 
-.sidebarIcon {
-  font-size: 16px;
-  margin-left: 10px;
-}
+  i {
+    font-size: 16px;
+    margin-left: 10px;
+  }
+`;

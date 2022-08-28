@@ -1,4 +1,6 @@
-.register {
+import styled from "styled-components";
+
+export const StyledContainer = styled.div`
   height: calc(100vh - 50px);
   flex-direction: column;
   display: flex;
@@ -10,42 +12,46 @@
     ),
     url("https://images.pexels.com/photos/317355/pexels-photo-317355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
   background-size: cover;
-}
 
-.registerTitle {
-  text-align: center;
-  font-size: 50px;
-}
+  span {
+    text-align: center;
+    font-size: 50px;
+  }
+`;
 
-.registerForm {
+export const StyledFormContainer = styled.form`
   width: 500px;
   padding: 10px;
   margin-top: 20px;
   display: flex;
   justify-content: center;
   flex-direction: column;
+
+  > label {
+    font-weight: bold;
+    margin: 10px 0;
+  }
+`;
+
+interface InputProps {
+  error?: boolean;
 }
 
-.registerForm > label {
-  font-weight: bold;
-  margin: 10px 0;
-}
-
-.registerInput {
+export const StyledInput = styled.input<InputProps>`
   padding: 10px;
   background-color: white;
   border: none;
-}
 
-.registerInput.errorInput {
-  border: 1px solid crimson;
-}
+  &.errorInput {
+    border: 1px solid crimson;
+  }
 
-.registerInput:focus {
-  outline: none;
-}
+  :focus {
+    outline: none;
+  }
+`;
 
-.registerButton {
+export const StyledButton = styled.button`
   margin-top: 20px;
   cursor: pointer;
   background-color: teal;
@@ -54,9 +60,9 @@
   border: none;
   border-radius: 10px;
   text-align: center;
-}
+`;
 
-.registerLoginButton {
+export const StyledLoginButton = styled.button`
   position: absolute;
   top: 60px;
   right: 20px;
@@ -66,4 +72,4 @@
   border: none;
   color: white;
   border-radius: 10px;
-}
+`;

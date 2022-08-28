@@ -53,6 +53,19 @@ export const StyledNoImage = styled.div`
     justify-content: center;
     color: ${(props) => (props.theme.isActive ? "#fff" : "#000")};
   }
+
+  i {
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+    border: 1px solid ${(props) => props.theme.color};
+    border-radius: 50%;
+    color: rgb(129, 125, 125);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
 `;
 
 export const StyledSubmitButton = styled.div`
@@ -107,4 +120,13 @@ export const StyledMarkdownHeader = styled.div`
   p {
     font-size: 17px;
   }
+`;
+
+export const StyledTextArea = styled.textarea`
+  flex: 1;
+  padding: 10px 20px;
+  font-family: inherit;
+  font-size: 20px;
+  outline: none;
+  min-height: 100vh;
 `;

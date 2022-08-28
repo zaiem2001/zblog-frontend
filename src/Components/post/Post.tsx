@@ -7,10 +7,10 @@ import { v4 as uuidv4 } from "uuid";
 
 import { timeAgoFormat } from "../../Utils/helpers";
 import { SingleBlogFragment } from "../../Queries/Blog/GetBlog.fragment";
-import "./post.css";
 import {
   StyledBlogInfo,
   StyledContainer,
+  StyledLink,
   StyledPostCategories,
   StyledPostDate,
   StyledPostDescription,
@@ -30,11 +30,11 @@ const Post: React.FC<PostProps> = ({ blog }) => {
 
   return (
     <StyledContainer>
-      <Link
+      <StyledLink
         to={`/post/${getFormattedURL(fragmentData.title)}/${fragmentData.id}`}
       >
         <img className="postImg" src={fragmentData?.image} alt="blog" />
-      </Link>
+      </StyledLink>
 
       <StyledBlogInfo className="postInfo">
         <div>

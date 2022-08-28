@@ -12,21 +12,6 @@
   object-fit: cover;
 }
 
-.settingsPPIcon {
-  width: 25px;
-  height: 25px;
-  padding: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  border-radius: 50%;
-  margin-left: 10px;
-  color: white;
-  background-color: lightcoral;
-  cursor: pointer;
-}
-
 .settingsPPButton:focus {
   outline-style: none;
 }

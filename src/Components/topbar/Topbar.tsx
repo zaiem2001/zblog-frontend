@@ -7,13 +7,13 @@ import {
   StlyedTopUl,
   StyledContainer,
   StyledLeftWrapper,
+  StyledLink,
   StyledRightWrapper,
   StyledThemeContainer,
   StyledTopCenter,
   StyledTopListItem,
 } from "./Topbar.styled";
 import { User } from "../../Constants/Interfaces";
-import "./topbar.css";
 
 interface Props {
   logout: () => any;
@@ -37,12 +37,11 @@ const Topbar: React.FC<Props> = ({
           href="https://www.linkedin.com/in/zaiem-munshi-b84a3321b/"
           target="_blank"
           rel="noreferrer"
-          className="topIcon"
         >
           <LinkedinOutlined />{" "}
         </a>
         <a href="https://github.com/zaiem2001" target="_blank" rel="noreferrer">
-          <i className="topIcon fab fa-github-square"></i>
+          <i className="fab fa-github-square"></i>
         </a>
       </StyledLeftWrapper>
 
@@ -70,9 +69,8 @@ const Topbar: React.FC<Props> = ({
       </StyledTopCenter>
 
       <StyledRightWrapper>
-        <Link className="link" to="/settings">
+        <StyledLink className="link" to="/settings">
           <img
-            className="topImg"
             src={
               user?.profilePicture
                 ? user?.profilePicture
@@ -80,8 +78,8 @@ const Topbar: React.FC<Props> = ({
             }
             alt={isLoggedIn ? user?.username : "userProfile"}
           />
-        </Link>
-        <i className="topSearchIcon fas fa-search"></i>
+        </StyledLink>
+        <i className="fas fa-search"></i>
 
         <StyledThemeContainer>
           <Switch onChange={onThemeToggle} defaultChecked={isDarkMode} />

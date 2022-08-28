@@ -7,7 +7,7 @@ import { GetBlogsPaginatedQuery } from "../../Queries/Blog/__generated__/GetBlog
 
 import UseDocumentTitle from "../../Hooks/UseDocumentTitle";
 import Posts from "../../Components/posts/Posts";
-import "./homepage.css";
+import { StyledContainer } from "./Home.styled";
 
 const Homepage: React.FC = () => {
   UseDocumentTitle("Z Blog - Homepage");
@@ -33,9 +33,9 @@ const Homepage: React.FC = () => {
   return (
     <>
       <Header />
-      <div className="home">
+      <StyledContainer className="home">
         <Posts blogsRef={blogsRef} />
-      </div>
+      </StyledContainer>
     </>
   );
 };

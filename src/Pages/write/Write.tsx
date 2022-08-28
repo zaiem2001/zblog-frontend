@@ -26,6 +26,7 @@ import {
   StyledMarkdownHeader,
   StyledNoImage,
   StyledSubmitButton,
+  StyledTextArea,
 } from "./Write.styled";
 import { CATEGORIES, exampleMarkdownText } from "../../Constants/constants";
 
@@ -130,7 +131,7 @@ const Write: React.FC = () => {
           <StyledNoImage>
             <div>
               <label htmlFor="fileInput">
-                <i className="writeIcon fas fa-plus"></i>
+                <i className="fas fa-plus"></i>
               </label>
               <input
                 id="fileInput"
@@ -178,8 +179,7 @@ const Write: React.FC = () => {
           </StyledMarkdownHeader>
 
           <StyledMarkdownContainer className="markDownTextContainer">
-            <textarea
-              className="markDownInput"
+            <StyledTextArea
               placeholder="Write your Blog..."
               autoFocus={true}
               value={markDown}

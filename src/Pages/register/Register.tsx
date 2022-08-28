@@ -1,15 +1,22 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useMutation } from "react-relay";
 import { Link, useNavigate } from "react-router-dom";
 
-import UseDocumentTitle from "../../Hooks/UseDocumentTitle";
-import { SignupSchema } from "../../Utils/Validations";
-import "./register.css";
-import ErrorMessage from "../../Components/ErrorMessage/ErrorMessage";
-import { useMutation } from "react-relay";
 import { registerMutation } from "../../Queries/User/Auth";
+
+import UseDocumentTitle from "../../Hooks/UseDocumentTitle";
+import ErrorMessage from "../../Components/ErrorMessage/ErrorMessage";
 import Message from "../../Components/Message/Message";
+import {
+  StyledButton,
+  StyledContainer,
+  StyledFormContainer,
+  StyledInput,
+  StyledLoginButton,
+} from "./Register.styled";
+import { SignupSchema } from "../../Utils/Validations";
 
 type FormValues = {
   username: string;
@@ -55,14 +62,13 @@ const Register: React.FC = () => {
   });
 
   return (
-    <div className="register">
-      <span className="registerTitle">Register</span>
-      <form className="registerForm" onSubmit={onSubmit}>
+    <StyledContainer>
+      <span>Register</span>
+
+      <StyledFormContainer onSubmit={onSubmit}>
         <label>Username</label>
-        <input
-          className={
-            errors.username ? "registerInput errorInput" : "registerInput"
-          }
+        <StyledInput
+          className={errors.username ? "errorInput" : ""}
           placeholder="Enter your Username"
           {...register("username")}
         />
@@ -71,10 +77,8 @@ const Register: React.FC = () => {
         )}
 
         <label>Email</label>
-        <input
-          className={
-            errors.email ? "registerInput errorInput" : "registerInput"
-          }
+        <StyledInput
+          className={errors.email ? "errorInput" : ""}
           placeholder="Enter your Email"
           type="email"
           {...register("email")}
@@ -82,10 +86,8 @@ const Register: React.FC = () => {
         {errors.email && <ErrorMessage message={errors!.email!.message} />}
 
         <label>Password</label>
-        <input
-          className={
-            errors.password ? "registerInput errorInput" : "registerInput"
-          }
+        <StyledInput
+          className={errors.password ? "errorInput" : ""}
           placeholder="input password"
           {...register("password")}
           type="password"
@@ -95,12 +97,8 @@ const Register: React.FC = () => {
         )}
 
         <label>Confirm Password</label>
-        <input
-          className={
-            errors.confirmPassword
-              ? "registerInput errorInput"
-              : "registerInput"
-          }
+        <StyledInput
+          className={errors.confirmPassword ? "errorInput" : ""}
           placeholder="Confirm Password"
           {...register("confirmPassword")}
           type="password"
@@ -109,15 +107,17 @@ const Register: React.FC = () => {
           <ErrorMessage message={errors!.confirmPassword!.message} />
         )}
 
-        <button className="registerButton" type="submit" disabled={isLoading}>
+        <StyledButton type="submit" disabled={isLoading}>
           Register
-        </button>
-      </form>
+        </StyledButton>
+      </StyledFormContainer>
 
       <Link to="/login">
-        <button className="registerLoginButton">Login</button>
+        <StyledLoginButton className="registerLoginButton">
+          Login
+        </StyledLoginButton>
       </Link>
-    </div>
+    </StyledContainer>
   );
 };
 

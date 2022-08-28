@@ -1,13 +1,17 @@
 import React from "react";
 
-import "./error.css";
+import { StyledError } from "./Error.styled";
 
 type ErrorProps = {
   message: string | undefined;
 };
 
 const ErrorMessage: React.FC<ErrorProps> = ({ message }) => {
-  return <p className="errorMessage">{message || "Something went Wrong."}</p>;
+  return (
+    <StyledError className="errorMessage">
+      {message || "Something went Wrong."}
+    </StyledError>
+  );
 };
 
 export default ErrorMessage;

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const StyledContainer = styled.div`
@@ -17,9 +18,23 @@ export const StyledLeftWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  a,
+  i {
+    font-size: 20px;
+    margin-right: 10px;
+    color: #eee;
+    cursor: pointer;
+  }
 `;
 
-export const StyledRightWrapper = styled(StyledLeftWrapper)``;
+export const StyledRightWrapper = styled(StyledLeftWrapper)`
+  i {
+    font-size: 18px;
+    color: #666;
+    cursor: pointer;
+  }
+`;
 
 export const StyledTopCenter = styled.div`
   flex: 6;
@@ -58,5 +73,16 @@ export const StyledThemeContainer = styled.div`
     width: 30px;
     height: 30px;
     object-fit: cover;
+  }
+`;
+
+export const StyledLink = styled(Link)`
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    cursor: pointer;
   }
 `;

@@ -178,7 +178,7 @@ const Settings: React.FC<Props> = ({ user, setUser, logout }) => {
                 alt={user?.username}
               />
               <label htmlFor="fileInput">
-                <i className="settingsPPIcon far fa-user-circle"></i>{" "}
+                <i className="far fa-user-circle"></i>{" "}
               </label>
               <input
                 type="file"

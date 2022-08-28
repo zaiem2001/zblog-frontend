@@ -52,6 +52,21 @@ export const StyledFormContainer = styled.form`
     padding: 10px;
     outline: none;
   }
+
+  i {
+    width: 25px;
+    height: 25px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 50%;
+    margin-left: 10px;
+    color: white;
+    background-color: lightcoral;
+    cursor: pointer;
+  }
 `;
 
 export const StyledUserBlogsContainer = styled.div`
