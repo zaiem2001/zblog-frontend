@@ -3,6 +3,7 @@ import { useFragment, useMutation } from "react-relay";
 import { Link, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { v4 as uuidv4 } from "uuid";
 
 import { SingleBlogFragment } from "../../Queries/Blog/GetBlog.fragment";
 import { LikeBlogMutation } from "../../Queries/Blog/Mutations/__generated__/LikeBlogMutation.graphql";
@@ -20,6 +21,19 @@ import "./singlePost.css";
 import CustomModal from "../Modal/Modal";
 import UseDocumentTitle from "../../Hooks/UseDocumentTitle";
 import Message from "../Message/Message";
+import {
+  StyledBlogTitle,
+  StyledCommentInputBox,
+  StyledCommentsContainer,
+  StyledCommentsWrapper,
+  StyledContainer,
+  StyledLoggedInModal,
+  StyledNoComments,
+  StyledPostDescription,
+  StyledPostInfo,
+  StyledTitle,
+  StyledWrapper,
+} from "./SinglePost.styled";
 
 interface Props {
   blogRef: any;
@@ -122,11 +136,14 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
   };
 
   return (
-    <div className="singlePost">
-      <div className="singlePostWrapper">
+    <StyledContainer>
+      <StyledWrapper>
         <img className="singlePostImg" src={blog?.image} alt={blog?.title} />
-        <h1 className="singlePostTitle">
-          {blog?.title}
+
+        <StyledBlogTitle>
+          <span>{blog?.title}</span>
+        </StyledBlogTitle>
+        <StyledTitle>
           <div className="singlePostEdit">
             <i
               onClick={handleLike}
@@ -148,8 +165,9 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
               </>
             )}
           </div>
-        </h1>
-        <div className="singlePostInfo">
+        </StyledTitle>
+
+        <StyledPostInfo>
           <div className="info-top">
             <span>
               Author:
@@ -169,17 +187,18 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
             </span>
           </div>
           <span>{timeAgoFormat(blog?.createdAt)}</span>
-        </div>
-        <div className="singlePostDesc">
+        </StyledPostInfo>
+
+        <StyledPostDescription>
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {blog?.description}
           </ReactMarkdown>
-        </div>
+        </StyledPostDescription>
 
-        <div className="postCommentsWrapper">
-          <h1 className="commentTitle">Comments</h1>
+        <StyledCommentsWrapper>
+          <StyledTitle>Comments</StyledTitle>
           <form onSubmit={handleComment}>
-            <div className="commentInputBox">
+            <StyledCommentInputBox>
               <input
                 type="text"
                 name="comment"
@@ -188,24 +207,24 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
                 onChange={(e) => setComment(e.target.value)}
                 value={comment}
               />
-            </div>
+            </StyledCommentInputBox>
           </form>
 
-          <div className="Postcomments">
+          <StyledCommentsContainer>
             {blog?.comments.length ? (
               blog?.comments?.map(
                 (comment: { user: User; comment: string; date: string }) => (
-                  <Comment commentObj={comment} />
+                  <Comment commentObj={comment} key={uuidv4()} />
                 )
               )
             ) : (
-              <div className="noComments">
+              <StyledNoComments>
                 <p>No Comments</p>
-              </div>
+              </StyledNoComments>
             )}
-          </div>
-        </div>
-      </div>
+          </StyledCommentsContainer>
+        </StyledCommentsWrapper>
+      </StyledWrapper>
 
       <CustomModal
         visible={visible}
@@ -213,9 +232,9 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
         onOk={handleOnOk}
         title="You are not Logged in."
       >
-        <div className="loggedInModal">
+        <StyledLoggedInModal>
           <p>Login to Like or Comment on the Blog.</p>
-        </div>
+        </StyledLoggedInModal>
       </CustomModal>
 
       <CustomModal
@@ -228,7 +247,7 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
       >
         <p>Are you sure you want to Delete the Blog ?</p>
       </CustomModal>
-    </div>
+    </StyledContainer>
   );
 };
 

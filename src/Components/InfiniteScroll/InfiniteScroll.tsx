@@ -1,5 +1,7 @@
 import React from "react";
 import { StyledInfiniteScrollContainer } from "./infiniteScroll.styled";
+import { v4 as uuidv4 } from "uuid";
+
 interface Props {
   children: React.ReactNode;
   loadMore: () => any;
@@ -18,7 +20,7 @@ const StyledInfiniteScroll: React.FC<Props> = ({
       loadMore={loadMore}
       hasMore={hasMore}
       loader={loader}
-      // style={{ display: "flex", flexWrap: "wrap" }}
+      key={uuidv4()}
     >
       {children}
     </StyledInfiniteScrollContainer>

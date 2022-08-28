@@ -3,10 +3,19 @@ import { useFragment } from "react-relay";
 import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { v4 as uuidv4 } from "uuid";
 
 import { timeAgoFormat } from "../../Utils/helpers";
 import { SingleBlogFragment } from "../../Queries/Blog/GetBlog.fragment";
 import "./post.css";
+import {
+  StyledBlogInfo,
+  StyledContainer,
+  StyledPostCategories,
+  StyledPostDate,
+  StyledPostDescription,
+  StyledPostTitle,
+} from "./Post.styled";
 
 interface PostProps {
   blog: any;
@@ -20,23 +29,23 @@ const Post: React.FC<PostProps> = ({ blog }) => {
   const fragmentData = useFragment(SingleBlogFragment, blog.node);
 
   return (
-    <div className="post">
+    <StyledContainer>
       <Link
         to={`/post/${getFormattedURL(fragmentData.title)}/${fragmentData.id}`}
       >
-        <img className="postImg" src={fragmentData?.image} alt="" />
+        <img className="postImg" src={fragmentData?.image} alt="blog" />
       </Link>
 
-      <div className="postInfo">
-        <div className="postCats">
+      <StyledBlogInfo className="postInfo">
+        <div>
           {fragmentData?.categories?.map((category: string) => (
-            <span className="postCat" key={category}>
+            <StyledPostCategories className="postCat" key={uuidv4()}>
               {category}
-            </span>
+            </StyledPostCategories>
           ))}
         </div>
 
-        <span className="postTitle">
+        <StyledPostTitle className="postTitle">
           <Link
             to={`/post/${getFormattedURL(fragmentData.title)}/${
               fragmentData.id
@@ -45,18 +54,21 @@ const Post: React.FC<PostProps> = ({ blog }) => {
           >
             {fragmentData?.title}
           </Link>
-        </span>
+        </StyledPostTitle>
+
         <hr />
-        <span className="postDate">
+
+        <StyledPostDate>
           {timeAgoFormat(fragmentData?.createdAt)}
-        </span>
-      </div>
-      <p className="postDesc">
+        </StyledPostDate>
+      </StyledBlogInfo>
+
+      <StyledPostDescription>
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {fragmentData?.description}
         </ReactMarkdown>
-      </p>
-    </div>
+      </StyledPostDescription>
+    </StyledContainer>
   );
 };
 

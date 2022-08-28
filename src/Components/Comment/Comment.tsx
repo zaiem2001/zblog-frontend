@@ -1,6 +1,14 @@
 import { User } from "../../Constants/Interfaces";
 import { timeAgoFormat } from "../../Utils/helpers";
-import "./comment.css";
+
+import {
+  StyledCommentedBy,
+  StyledCommentTime,
+  StyledContainer,
+  StyledImgContainer,
+  StyledLeftContainer,
+  StyledUserComment,
+} from "./Comments.styled";
 
 type Props = {
   commentObj: {
@@ -12,22 +20,25 @@ type Props = {
 
 const Comment: React.FC<Props> = ({ commentObj }) => {
   return (
-    <div className="commentWrapper">
-      <div className="left">
-        <div className="userImage">
+    <StyledContainer>
+      <StyledLeftContainer>
+        <StyledImgContainer>
           <img
             src={commentObj?.user?.profilePicture || "/assets/noAvatar.png"}
             alt={commentObj?.user?.username || "user"}
           />
-        </div>
-        <p className="commentBy">{commentObj?.user?.username || "User"}</p>
-        <p className="userComment">{commentObj?.comment}</p>
-      </div>
+        </StyledImgContainer>
+
+        <StyledCommentedBy>
+          {commentObj?.user?.username || "User"}
+        </StyledCommentedBy>
+        <StyledUserComment>{commentObj?.comment}</StyledUserComment>
+      </StyledLeftContainer>
 
       <div className="right">
-        <div className="commentTime">{timeAgoFormat(commentObj.date)}</div>
+        <StyledCommentTime>{timeAgoFormat(commentObj.date)}</StyledCommentTime>
       </div>
-    </div>
+    </StyledContainer>
   );
 };
 

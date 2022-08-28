@@ -13,8 +13,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  background-color: #171717 !important;
 }
 
 ::-webkit-scrollbar {
@@ -22,7 +20,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #eee;
+  background-color: #6c63ff;
 }
 
 ::-webkit-scrollbar-track {

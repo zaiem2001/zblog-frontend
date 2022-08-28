@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "react-relay";
 import Message from "../Components/Message/Message";
+import { localStorageKeys } from "../Constants/constants";
 import { User } from "../Constants/Interfaces";
 import { LoginMutation } from "../Queries/User/Auth";
 import { getToken } from "../Utils/GetToken";
@@ -13,8 +14,19 @@ type Props = {
 const AuthProvider: React.FC<Props> = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(!!getToken());
 
-  const currentUser = localStorage.getItem("zblog-user")
-    ? JSON.parse(localStorage.getItem("zblog-user")!)
+  const savedThemeMode =
+    localStorage.getItem(localStorageKeys.darkMode) || "true";
+  const [isDarkMode, setIsDarkMode] = useState(savedThemeMode === "true");
+
+  const toggleDarkMode = () => {
+    setIsDarkMode((prev) => {
+      localStorage.setItem(localStorageKeys.darkMode, String(!prev));
+      return !prev;
+    });
+  };
+
+  const currentUser = localStorage.getItem(localStorageKeys.user)
+    ? JSON.parse(localStorage.getItem(localStorageKeys.user)!)
     : null;
   const [user, setUser] = useState<User | null>(currentUser);
 
@@ -31,9 +43,12 @@ const AuthProvider: React.FC<Props> = (props) => {
           Message({ text: error[0]?.message, type: "error" });
         } else {
           if (data.user) {
-            localStorage.setItem("zblog-token", data.user.token);
+            localStorage.setItem(localStorageKeys.token, data.user.token);
             setUser(data.user.user);
-            localStorage.setItem("zblog-user", JSON.stringify(data.user.user));
+            localStorage.setItem(
+              localStorageKeys.user,
+              JSON.stringify(data.user.user)
+            );
             setIsLoggedIn(true);
             Message({ text: "Login Success", type: "success" });
           }
@@ -43,7 +58,7 @@ const AuthProvider: React.FC<Props> = (props) => {
   };
 
   const logout = () => {
-    localStorage.removeItem("zblog-token");
+    localStorage.removeItem(localStorageKeys.token);
     setUser(null);
     setIsLoggedIn(false);
   };
@@ -57,6 +72,8 @@ const AuthProvider: React.FC<Props> = (props) => {
         logout,
         isLoggedIn,
         isLoading,
+        isDarkMode,
+        toggleDarkMode,
       }}
     >
       {props.children}

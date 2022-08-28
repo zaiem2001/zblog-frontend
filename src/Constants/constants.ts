@@ -1,3 +1,9 @@
+export const localStorageKeys = {
+  darkMode: "zblog-darkMode",
+  user: "zblog-user",
+  token: "zblog-token",
+};
+
 export const CATEGORIES = [
   "Blockchain",
   "Metaverse",

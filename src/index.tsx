@@ -8,6 +8,7 @@ import App from "./App";
 import "./index.css";
 import "antd/dist/antd.min.css";
 import AuthProvider from "./Context/AuthProvider";
+import FallbackLoader from "./Components/FallbackLoader/FallbackLoader";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,7 +16,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <RelayEnvironmentProvider environment={RelayEnvironment}>
-      <Suspense fallback="Loading...">
+      <Suspense fallback={<FallbackLoader />}>
         <BrowserRouter>
           <AuthProvider>
             <App />

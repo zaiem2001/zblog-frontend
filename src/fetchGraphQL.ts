@@ -1,3 +1,5 @@
+import { localStorageKeys } from "./Constants/constants";
+
 type Headers = {
   "Content-Type": string;
   Authorization?: string;
@@ -5,7 +7,7 @@ type Headers = {
 
 async function fetchGraphQL(text: any, variables: any) {
   const URL = "http://localhost:4000/graphql";
-  const token = localStorage.getItem("zblog-token") || null;
+  const token = localStorage.getItem(localStorageKeys.token) || null;
 
   const headers: Headers = {
     "Content-Type": "application/json",
