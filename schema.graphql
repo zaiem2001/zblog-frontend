@@ -83,6 +83,7 @@ type Query {
   user(id: ID!): User
   blogs(filter: FilterInput, sortBy: SortInput, after: String, first: Int): BlogConnection
   blog(id: ID): Blog
+  seeder(token: String): String
 }
 
 input SortInput {
