@@ -41,6 +41,18 @@ export const StyledTitle = styled.span`
   font-weight: 600;
 `;
 
+export const StyledDesciption = styled.div`
+  color: #cbcbcb;
+  padding: 10px;
+  text-align: center;
+  font-family: "Varela Round", sans-serif;
+
+  p {
+    margin-top: 0.6rem;
+    color: #eee;
+  }
+`;
+
 export const StyledList = styled.ul`
   list-style-type: none;
   margin-bottom: 30px;
@@ -57,14 +69,21 @@ export const StyledListItem = styled.li`
 
 export const StyledSocial = styled.div`
   margin-top: 15px;
-  width: 250px;
+  width: 150px;
   display: flex;
   align-items: center;
   color: white;
-  justify-content: center;
+  justify-content: space-around;
 
-  i {
-    font-size: 16px;
-    margin-left: 10px;
+  a {
+    color: white;
+
+    :hover {
+      color: crimson;
+    }
+
+    i {
+      font-size: 20px;
+    }
   }
 `;

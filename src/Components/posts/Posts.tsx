@@ -12,13 +12,17 @@ import {
 import { StyledInfiniteScrollContainer } from "../InfiniteScroll/infiniteScroll.styled";
 import Post from "../post/Post";
 import Spinner from "../Spinner/Spinner";
+import EmptyContainer from "../Empty/Empty";
 import { StyledBlogsContainer, StyledContainer } from "./Post.styled";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   blogsRef: GetBlogsPaginatedQuery$data;
 }
 
 const Posts: React.FC<Props> = ({ blogsRef }) => {
+  const navigate = useNavigate();
+
   const { data, hasNext, isLoadingNext, loadNext } = usePaginationFragment<
     GetBlogsPaginatedQuery,
     GetBlogPagination_query$key
@@ -37,26 +41,35 @@ const Posts: React.FC<Props> = ({ blogsRef }) => {
 
   return (
     <StyledContainer>
-      <StyledInfiniteScrollContainer
-        loader={
-          isLoadingNext ? (
-            <Spinner size="large" data-spinner="spinner" loading />
-          ) : (
-            <></>
-          )
-        }
-        loadMore={() => {
-          handleLoadMore(data.blogs?.edges);
-        }}
-        hasMore={hasNext}
-      >
-        <StyledBlogsContainer>
-          {data.blogs?.edges &&
-            data.blogs?.edges.map((item) => (
-              <Post blog={item} key={uuidv4()} />
-            ))}
-        </StyledBlogsContainer>
-      </StyledInfiniteScrollContainer>
+      {data?.blogs ? (
+        <StyledInfiniteScrollContainer
+          loader={
+            isLoadingNext ? (
+              <Spinner size="large" data-spinner="spinner" loading />
+            ) : (
+              <></>
+            )
+          }
+          loadMore={() => {
+            handleLoadMore(data.blogs?.edges);
+          }}
+          hasMore={hasNext}
+        >
+          <StyledBlogsContainer>
+            {data.blogs?.edges &&
+              data.blogs?.edges.map((item) => (
+                <Post blog={item} key={uuidv4()} />
+              ))}
+          </StyledBlogsContainer>
+        </StyledInfiniteScrollContainer>
+      ) : (
+        <EmptyContainer
+          addButton
+          buttonText="Create Blog"
+          description="No blogs"
+          onBtnClick={() => navigate("/write")}
+        />
+      )}
     </StyledContainer>
   );
 };

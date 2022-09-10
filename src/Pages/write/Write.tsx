@@ -91,7 +91,6 @@ const Write: React.FC = () => {
       return;
     }
 
-    console.log(markDown);
     upload(file, (url) => handleSubmit(url));
   };
 
