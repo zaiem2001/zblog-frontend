@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { MobileProps } from "../../Constants/Interfaces";
 
-export const StyledContainer = styled.div`
-  width: 385px;
-  margin: 0px 25px 40px 25px;
+export const StyledContainer = styled.div<MobileProps>`
+  width: ${({ ismobile }) => (ismobile === "true" ? "320px" : "385px")};
+  margin: ${({ ismobile }) =>
+    ismobile === "true" ? "10px 0" : "0px 25px 40px 25px"};
   display: flex;
   flex-direction: column;
 
@@ -20,7 +22,7 @@ export const StyledBlogInfo = styled.div`
   align-items: center;
 `;
 
-export const StyledPostCategories = styled.span`
+export const StyledPostCategories = styled.span<MobileProps>`
   font-family: "Varela Round", Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 15px;
@@ -28,6 +30,8 @@ export const StyledPostCategories = styled.span`
   line-height: 19px;
   margin-top: 15px;
   margin-right: 10px;
+
+  display: ${({ ismobile }) => ismobile === "true" && "none"};
 `;
 
 export const StyledPostTitle = styled.span`
@@ -66,13 +70,14 @@ export const StyledPostDescription = styled.div`
   }
 `;
 
-export const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)<MobileProps>`
   text-decoration: none;
 
   img {
-    width: 385px;
+    width: ${({ ismobile }) => (ismobile === "true" ? "320px" : "385px")};
     height: 280px;
-    object-fit: cover;
+    object-fit: ${({ ismobile }) =>
+      ismobile === "true" ? "contain" : "cover"};
     border-radius: 7px;
   }
 `;

@@ -5,3 +5,7 @@ export type User = {
   email: string;
   profilePicture: string;
 };
+
+export interface MobileProps {
+  ismobile?: boolean | string;
+}

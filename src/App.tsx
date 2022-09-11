@@ -9,6 +9,8 @@ import Register from "./Pages/register/Register";
 import Settings from "./Pages/settings/Settings";
 import Single from "./Pages/single/Single";
 import Write from "./Pages/write/Write";
+import About from "./Pages/About/About";
+
 import Topbar from "./Components/topbar/Topbar";
 import { darkModeTheme, lightModeTheme } from "./Theme/Themes";
 import { StyledContainer } from "./index.styled";
@@ -48,6 +50,8 @@ const App: React.FC = () => {
             path="/write"
             element={isLoggedIn ? <Write /> : <Navigate to="/login" replace />}
           />
+
+          <Route path="/about" element={<About />} />
 
           <Route
             path="/settings"

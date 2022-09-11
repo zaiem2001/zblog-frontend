@@ -29,6 +29,7 @@ import {
 import { timeAgoFormat } from "../../Utils/helpers";
 import { User } from "../../Constants/Interfaces";
 import { localStorageKeys } from "../../Constants/constants";
+import useIsMobile from "../../Hooks/UseIsMobile";
 
 interface Props {
   user: User;
@@ -40,6 +41,8 @@ const Settings: React.FC<Props> = ({ user, setUser, logout }) => {
   const navigate = useNavigate();
   const { adding, progress, upload } = useUploadFile();
   UseDocumentTitle(`${user?.username} | Profile`);
+
+  const isMobile = useIsMobile();
 
   const [file, setFile] = useState<File | null>(null);
   const [username, setUsername] = useState(user.username);
@@ -154,7 +157,7 @@ const Settings: React.FC<Props> = ({ user, setUser, logout }) => {
   return (
     <StyledContainer>
       <StyledWrapper>
-        <StyledTitle>
+        <StyledTitle ismobile={isMobile}>
           <span>Update Your Account</span>
           <span>
             Last Updated (
@@ -263,7 +266,7 @@ const Settings: React.FC<Props> = ({ user, setUser, logout }) => {
           </div>
         </StyledUserBlogsContainer>
       </StyledWrapper>
-      <SidebarNav />
+      {!isMobile && <SidebarNav />}
 
       <CustomModal
         title="This action is Irreversible!"

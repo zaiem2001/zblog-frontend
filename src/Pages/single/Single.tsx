@@ -8,9 +8,11 @@ import { GetBlogByTitleQuery } from "../../Queries/Blog/__generated__/GetBlogByT
 import SidebarNav from "../../Components/sidebar/SideBarNav";
 import SinglePost from "../../Components/singlePost/SinglePost";
 import { StyledContainer } from "./Single.styled";
+import useIsMobile from "../../Hooks/UseIsMobile";
 
 const Single: React.FC = () => {
   const { id } = useParams();
+  const isMobile = useIsMobile();
 
   const singleBlogRef = useLazyLoadQuery<GetBlogByTitleQuery>(
     GetSingleBlog,
@@ -24,8 +26,8 @@ const Single: React.FC = () => {
 
   return (
     <StyledContainer>
-      <SinglePost blogRef={singleBlogRef} />
-      <SidebarNav />
+      <SinglePost blogRef={singleBlogRef} isMobile={isMobile} />
+      {!isMobile && <SidebarNav />}
     </StyledContainer>
   );
 };

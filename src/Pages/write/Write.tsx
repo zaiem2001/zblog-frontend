@@ -11,6 +11,8 @@ import { CreateUserBlogMutation } from "../../Queries/Blog/Mutations/CreateBlog"
 
 import { useUploadFile } from "../../Hooks/UseUploadFile";
 import UseDocumentTitle from "../../Hooks/UseDocumentTitle";
+import useIsMobile from "../../Hooks/UseIsMobile";
+
 import MultiSelect from "../../Components/Select/MultiSelect";
 import "./write.css";
 import Message from "../../Components/Message/Message";
@@ -32,6 +34,7 @@ import { CATEGORIES, exampleMarkdownText } from "../../Constants/constants";
 
 const Write: React.FC = () => {
   UseDocumentTitle("Z Blog - Create New Blog");
+  const isMobile = useIsMobile();
 
   const { adding, progress, upload } = useUploadFile();
   const navigate = useNavigate();
@@ -98,12 +101,13 @@ const Write: React.FC = () => {
     <StyledContainer>
       <StyledFormContainer onSubmit={handlePublish}>
         {file ? (
-          <StyledImageContainer>
+          <StyledImageContainer ismobile={isMobile}>
             <StyledBlogImage>
               <img src={URL.createObjectURL(file)} alt="blog_image" />
             </StyledBlogImage>
 
             <StyledDeleteOutlined
+              ismobile={isMobile}
               onClick={() => {
                 if (isPublishing || adding) return;
                 setFile(null);
@@ -127,7 +131,7 @@ const Write: React.FC = () => {
             )}
           </StyledImageContainer>
         ) : (
-          <StyledNoImage>
+          <StyledNoImage ismobile={isMobile}>
             <div>
               <label htmlFor="fileInput">
                 <i className="fas fa-plus"></i>
@@ -177,7 +181,10 @@ const Write: React.FC = () => {
             </p>
           </StyledMarkdownHeader>
 
-          <StyledMarkdownContainer className="markDownTextContainer">
+          <StyledMarkdownContainer
+            ismobile={isMobile}
+            className="markDownTextContainer"
+          >
             <StyledTextArea
               placeholder="Write your Blog..."
               autoFocus={true}
@@ -193,7 +200,7 @@ const Write: React.FC = () => {
           </StyledMarkdownContainer>
         </div>
 
-        <StyledSubmitButton>
+        <StyledSubmitButton ismobile={isMobile}>
           <StyledButton
             size="large"
             ghost

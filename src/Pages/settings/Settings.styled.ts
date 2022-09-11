@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { MobileProps } from "../../Constants/Interfaces";
 
 export const StyledContainer = styled.div`
   display: flex;
@@ -9,8 +10,8 @@ export const StyledWrapper = styled.div`
   padding: 20px;
 `;
 
-export const StyledTitle = styled.div`
-  display: flex;
+export const StyledTitle = styled.div<MobileProps>`
+  display: ${({ ismobile }) => !ismobile && "flex"};
   align-items: center;
   justify-content: space-between;
 
@@ -18,10 +19,25 @@ export const StyledTitle = styled.div`
     font-size: 30px;
     margin-bottom: 20px;
     color: lightcoral;
+
+    ${({ ismobile }) =>
+      ismobile &&
+      `
+      display: block;
+      font-size: 20px;
+      width: 100%;
+      text-align: center;
+    `}
   }
 
   span:nth-child(2) {
     color: ${(props) => props.theme.color};
+
+    ${({ ismobile }) =>
+      ismobile &&
+      `
+      margin-right: 50px;
+    `}
   }
 
   span:last-child {

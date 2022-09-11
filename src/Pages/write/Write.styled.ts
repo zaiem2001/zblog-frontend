@@ -1,6 +1,7 @@
 import { DeleteOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import styled from "styled-components";
+import { MobileProps } from "../../Constants/Interfaces";
 
 export const StyledContainer = styled.div`
   padding-top: 50px;
@@ -10,12 +11,18 @@ export const StyledFormContainer = styled.form`
   position: relative;
 `;
 
-export const StyledImageContainer = styled.div`
+export const StyledImageContainer = styled.div<MobileProps>`
   width: 40%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
+
+  ${({ ismobile }) =>
+    ismobile &&
+    `
+    height: 150px;
+  `}
 `;
 
 export const StyledBlogImage = styled.div`
@@ -26,16 +33,17 @@ export const StyledBlogImage = styled.div`
   }
 `;
 
-export const StyledDeleteOutlined = styled(DeleteOutlined)`
-  font-size: 44px;
+export const StyledDeleteOutlined = styled(DeleteOutlined)<MobileProps>`
+  font-size: ${({ ismobile }) => (ismobile ? "30px" : "44px")};
 
   svg {
     fill: red;
   }
 `;
 
-export const StyledNoImage = styled.div`
-  margin-left: 150px;
+export const StyledNoImage = styled.div<MobileProps>`
+  margin-left: ${({ ismobile }) => !ismobile && "150px"};
+  margin: ${({ ismobile }) => ismobile && " 20px auto"};
   width: 70vw;
   border-radius: 10px;
   object-fit: cover;
@@ -68,7 +76,7 @@ export const StyledNoImage = styled.div`
   }
 `;
 
-export const StyledSubmitButton = styled.div`
+export const StyledSubmitButton = styled.div<MobileProps>`
   position: absolute;
   top: 20px;
   right: 50px;
@@ -76,6 +84,13 @@ export const StyledSubmitButton = styled.div`
   border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
+
+  ${({ ismobile }) =>
+    ismobile &&
+    `
+  top: -3%;
+  left: 13%;
+  `}
 `;
 
 export const StyledButton = styled(Button)`
@@ -100,11 +115,12 @@ export const StyledMarkdown = styled.div`
   }
 `;
 
-export const StyledMarkdownContainer = styled.div`
+export const StyledMarkdownContainer = styled.div<MobileProps>`
   margin-top: 10px;
-  padding: 0 20px;
   display: flex;
   min-height: 100vh;
+
+  ${({ ismobile }) => ismobile && "flex-direction: column"};
 `;
 
 export const StyledMarkdownHeader = styled.div`

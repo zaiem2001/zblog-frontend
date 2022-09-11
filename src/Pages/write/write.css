@@ -34,3 +34,14 @@
 .markDownContainer {
   padding: 10px 0;
 }
+
+@media only screen and (max-width: 786px) {
+  .writeFormGroup {
+    margin: auto;
+  }
+
+  .writeInput {
+    font-size: 18px;
+    padding: 5px;
+  }
+}

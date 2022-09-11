@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { MobileProps } from "../../Constants/Interfaces";
 
 export const StyledContainer = styled.div`
   flex: 9;
 `;
 
-export const StyledWrapper = styled.div`
-  padding: 20px;
+export const StyledWrapper = styled.div<MobileProps>`
+  padding: ${({ ismobile }) => (ismobile ? "10px 0" : "20px")};
   padding-right: 0;
 
   img {
@@ -31,24 +32,24 @@ export const StyledBlogTitle = styled.div`
   font-size: 30px;
 `;
 
-export const StyledPostInfo = styled.div`
+export const StyledPostInfo = styled.div<MobileProps>`
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
-  font-size: 16px;
+  font-size: ${({ ismobile }) => (ismobile ? "14px" : "16px")};
   color: #be9656;
   font-family: "Varela Round", Arial, Helvetica, sans-serif;
 `;
 
-export const StyledPostDescription = styled.div`
+export const StyledPostDescription = styled.div<MobileProps>`
   padding: 0 20px;
-  font-size: 18px;
+  font-size: ${({ ismobile }) => (ismobile ? "14px" : "18px")};
   line-height: 25px;
   min-height: 200px;
 
   img {
-    width: 100px;
-    height: 100px;
+    width: ${({ ismobile }) => (ismobile ? "50px" : "100px")};
+    height: ${({ ismobile }) => (ismobile ? "50px" : "100px")};
     object-fit: cover;
   }
   > * {
@@ -56,10 +57,10 @@ export const StyledPostDescription = styled.div`
   }
 `;
 
-export const StyledCommentsWrapper = styled.div`
+export const StyledCommentsWrapper = styled.div<MobileProps>`
   padding: 5px 0;
   margin-top: 15px;
-  border-top: 1px solid #eee;
+  border-top: ${({ ismobile }) => (ismobile ? "none" : "1px solid #eee")};
 `;
 
 export const StyledCommentInputBox = styled.div`

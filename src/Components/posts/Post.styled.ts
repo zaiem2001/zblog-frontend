@@ -9,4 +9,6 @@ export const StyledContainer = styled.div`
 export const StyledBlogsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+
+  justify-content: center;
 `;

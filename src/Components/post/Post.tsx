@@ -16,6 +16,7 @@ import {
   StyledPostDescription,
   StyledPostTitle,
 } from "./Post.styled";
+import useIsMobile from "../../Hooks/UseIsMobile";
 
 interface PostProps {
   blog: any;
@@ -28,9 +29,12 @@ const getFormattedURL = (url: string) => {
 const Post: React.FC<PostProps> = ({ blog }) => {
   const fragmentData = useFragment(SingleBlogFragment, blog.node);
 
+  const isMobile = useIsMobile();
+
   return (
-    <StyledContainer>
+    <StyledContainer ismobile={isMobile.toString()}>
       <StyledLink
+        ismobile={isMobile.toString()}
         to={`/post/${getFormattedURL(fragmentData.title)}/${fragmentData.id}`}
       >
         <img className="postImg" src={fragmentData?.image} alt="blog" />
@@ -39,7 +43,11 @@ const Post: React.FC<PostProps> = ({ blog }) => {
       <StyledBlogInfo className="postInfo">
         <div>
           {fragmentData?.categories?.map((category: string) => (
-            <StyledPostCategories className="postCat" key={uuidv4()}>
+            <StyledPostCategories
+              className="postCat"
+              key={uuidv4()}
+              ismobile={isMobile.toString()}
+            >
               {category}
             </StyledPostCategories>
           ))}

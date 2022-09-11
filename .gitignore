@@ -9,6 +9,8 @@
 /coverage
 
 # relay files
+/__generated__
+__generated__
 
 
 # production

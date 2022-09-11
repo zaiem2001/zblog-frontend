@@ -38,9 +38,10 @@ import { StyledPostEdit } from "./SinglePost.styled";
 
 interface Props {
   blogRef: any;
+  isMobile: boolean;
 }
 
-const SinglePost: React.FC<Props> = ({ blogRef }) => {
+const SinglePost: React.FC<Props> = ({ blogRef, isMobile }) => {
   const { user, isLoggedIn } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -51,7 +52,7 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
 
   const [commitDelet, isDeleting] = useMutation<DeleteBlogMutation>(DeleteBlog);
 
-  UseDocumentTitle(`Z-${blog?.title}`);
+  UseDocumentTitle(`Z Blog-${blog?.title}`);
 
   const [comment, setComment] = useState("");
   const [visible, setVisible] = useState(false);
@@ -138,7 +139,7 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
 
   return (
     <StyledContainer>
-      <StyledWrapper>
+      <StyledWrapper ismobile={isMobile}>
         <img src={blog?.image} alt={blog?.title} />
 
         <StyledBlogTitle>
@@ -168,7 +169,7 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
           </StyledPostEdit>
         </StyledTitle>
 
-        <StyledPostInfo>
+        <StyledPostInfo ismobile={isMobile}>
           <div className="info-top">
             <span>
               Author:
@@ -190,13 +191,13 @@ const SinglePost: React.FC<Props> = ({ blogRef }) => {
           <span>{timeAgoFormat(blog?.createdAt)}</span>
         </StyledPostInfo>
 
-        <StyledPostDescription>
+        <StyledPostDescription ismobile={isMobile}>
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {blog?.description}
           </ReactMarkdown>
         </StyledPostDescription>
 
-        <StyledCommentsWrapper>
+        <StyledCommentsWrapper ismobile={isMobile}>
           <StyledTitle>Comments</StyledTitle>
           <form onSubmit={handleComment}>
             <StyledCommentInputBox>
