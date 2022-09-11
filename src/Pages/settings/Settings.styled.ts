@@ -5,9 +5,10 @@ export const StyledContainer = styled.div`
   display: flex;
 `;
 
-export const StyledWrapper = styled.div`
+export const StyledWrapper = styled.div<MobileProps>`
+  box-sizing: border-box;
   flex: 9;
-  padding: 20px;
+  padding: ${({ ismobile }) => (ismobile ? "10px" : "20px")};
 `;
 
 export const StyledTitle = styled.div<MobileProps>`

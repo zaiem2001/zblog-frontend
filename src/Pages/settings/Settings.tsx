@@ -156,7 +156,7 @@ const Settings: React.FC<Props> = ({ user, setUser, logout }) => {
 
   return (
     <StyledContainer>
-      <StyledWrapper>
+      <StyledWrapper ismobile={isMobile}>
         <StyledTitle ismobile={isMobile}>
           <span>Update Your Account</span>
           <span>
