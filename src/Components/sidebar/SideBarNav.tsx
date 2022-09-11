@@ -1,4 +1,5 @@
 import React from "react";
+import { SIDEBAR_IMAGES } from "../../Constants/constants";
 // import { Link } from "react-router-dom";
 
 import {
@@ -11,12 +12,18 @@ import {
   StyledTitle,
 } from "./Sidebar.styled";
 
+const getRandomIndex = (arrLength: number) => {
+  return Math.floor(Math.random() * arrLength);
+};
+
 const SidebarNav: React.FC = () => {
+  const randomImage = SIDEBAR_IMAGES[getRandomIndex(SIDEBAR_IMAGES.length)];
+
   return (
     <StyledContainer>
       <StyledSideBarItem>
         <StyledTitle>ABOUT ME</StyledTitle>
-        <img src="https://w.wallhaven.cc/full/kw/wallhaven-kwov61.png" alt="" />
+        <img src={randomImage} alt="quote" />
         <StyledDesciption>
           I'm a MERN stack developer, currently exploring some new Tech Stack,
           For example, GraphQL, Typescript, Relay etc.

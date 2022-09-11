@@ -4,6 +4,15 @@ export const localStorageKeys = {
   token: "zblog-token",
 };
 
+export const SIDEBAR_IMAGES = [
+  "/assets/code.jpg",
+  "/assets/different.png",
+  "/assets/eat-sleep.png",
+  "/assets/goalNotAchieved.png",
+  "/assets/poor-programmer.png",
+  "https://w.wallhaven.cc/full/kw/wallhaven-kwov61.png",
+];
+
 export const CATEGORIES = [
   "Blockchain",
   "Metaverse",

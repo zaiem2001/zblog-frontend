@@ -112,9 +112,11 @@ const Topbar: React.FC<Props> = ({
                 LOGOUT
               </StyledTopListItem>
             ) : (
-              <Link className="link" to="/login" onClick={resetActiveState}>
-                <StyledTopListItem>LOGIN</StyledTopListItem>
-              </Link>
+              <StyledTopListItem>
+                <Link className="link" to="/login" onClick={resetActiveState}>
+                  LOGIN
+                </Link>
+              </StyledTopListItem>
             )}
           </StlyedTopUl>
         </StyledTopCenter>

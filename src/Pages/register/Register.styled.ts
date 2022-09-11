@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { MobileProps } from "../../Constants/Interfaces";
 
 export const StyledContainer = styled.div`
   height: calc(100vh - 50px);
@@ -19,8 +20,8 @@ export const StyledContainer = styled.div`
   }
 `;
 
-export const StyledFormContainer = styled.form`
-  width: 500px;
+export const StyledFormContainer = styled.form<MobileProps>`
+  width: ${({ ismobile }) => (ismobile ? "100%" : "500px")};
   padding: 10px;
   margin-top: 20px;
   display: flex;

@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { registerMutation } from "../../Queries/User/Auth";
 
+import useIsMobile from "../../Hooks/UseIsMobile";
 import UseDocumentTitle from "../../Hooks/UseDocumentTitle";
 import ErrorMessage from "../../Components/ErrorMessage/ErrorMessage";
 import Message from "../../Components/Message/Message";
@@ -26,8 +27,10 @@ type FormValues = {
 };
 
 const Register: React.FC = () => {
-  UseDocumentTitle("Z Blog - Register Page");
   const navigate = useNavigate();
+  UseDocumentTitle("Z Blog - Register Page");
+
+  const isMobile = useIsMobile();
 
   const [commit, isLoading] = useMutation(registerMutation);
 
@@ -65,7 +68,7 @@ const Register: React.FC = () => {
     <StyledContainer>
       <span>Register</span>
 
-      <StyledFormContainer onSubmit={onSubmit}>
+      <StyledFormContainer onSubmit={onSubmit} ismobile={isMobile}>
         <label>Username</label>
         <StyledInput
           className={errors.username ? "errorInput" : ""}

@@ -1,5 +1,6 @@
 import { Button } from "antd";
 import styled from "styled-components";
+import { MobileProps } from "../../Constants/Interfaces";
 
 export const StyledContainer = styled.div`
   height: calc(100vh - 50px);
@@ -24,6 +25,7 @@ export const StyledFormContainer = styled.form`
   width: 100vw;
   display: flex;
   align-items: center;
+  padding: 10px;
   flex-direction: column;
 
   > label {
@@ -33,11 +35,11 @@ export const StyledFormContainer = styled.form`
   }
 `;
 
-export const StyledInput = styled.input`
+export const StyledInput = styled.input<MobileProps>`
   padding: 10px;
   background-color: white;
   border: none;
-  width: 50%;
+  width: ${({ ismobile }) => (ismobile ? "100%" : "50%")};
   font-size: 20px;
   font-family: inherit;
 
