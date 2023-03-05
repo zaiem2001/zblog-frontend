@@ -6,7 +6,8 @@ type Headers = {
 };
 
 // const BACKEND_URL = "https://zaiem-blog-app.herokuapp.com/graphql";
-const BACKEND_URL = "http://localhost:4000/graphql";
+const BACKEND_URL = "https://zblog-backend.onrender.com/graphql";
+// const BACKEND_URL = "http://localhost:4000/graphql";
 
 async function fetchGraphQL(text: any, variables: any) {
   const URL = BACKEND_URL;
