@@ -42,7 +42,7 @@
     "start": "npm run get-schema npm run relay && react-scripts start",
     "build": "npm run get-schema npm run relay && react-scripts build",
     "relay": "relay-compiler",
-    "get-schema": "get-graphql-schema http://localhost:4000/graphql > schema.graphql",
+    "get-schema": "get-graphql-schema https://zblog-backend.onrender.com/graphql > schema.graphql",
     "compile": "npm run get-schema && npm run relay",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
